@@ -58,6 +58,8 @@ let channel = socket.channel("room:lobby", {});
 let button = document.querySelector("#myButton");
 let offbutton = document.querySelector("#myOffButton");
 let marqueeButton = document.querySelector("#myMarqueeButton");
+let testButton = document.querySelector("#myTestButton");
+let rainbowButton = document.querySelector("#myRainbowButton");
 
 button.addEventListener("click", event => {
   channel.push("clicked", { body: "foo" });
@@ -69,6 +71,14 @@ offbutton.addEventListener("click", event => {
 
 marqueeButton.addEventListener("click", event => {
   channel.push("marquee", {body: "foo"});
+})
+
+testButton.addEventListener("click", event => {
+  channel.push("test");
+})
+
+rainbowButton.addEventListener("click", event => {
+  channel.push("rainbow");
 })
 
 channel

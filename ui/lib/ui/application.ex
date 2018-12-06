@@ -10,7 +10,7 @@ defmodule Ui.Application do
     children = [
       # Start the endpoint when the application starts
       supervisor(UiWeb.Endpoint, []),
-      worker(Nerves.Neopixel, [[pin: 18, count: 30]])
+      worker(Nerves.Neopixel, [[pin: 18, count: Ui.Led.led_count]])
       # Start your own worker by calling: Ui.Worker.start_link(arg1, arg2, arg3)
       # worker(Ui.Worker, [arg1, arg2, arg3]),
     ]
@@ -19,7 +19,7 @@ defmodule Ui.Application do
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Ui.Supervisor]
     start_val = Supervisor.start_link(children, opts)
-    Nerves.Neopixel.render(0, {127, 1..30 |> Enum.map(fn (x) -> {0, 0, 0} end)})
+    Ui.Led.turn_all_off
     start_val
   end
 
